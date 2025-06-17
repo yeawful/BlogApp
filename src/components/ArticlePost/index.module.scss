@@ -1,0 +1,23 @@
+.articlePost {
+    background-color: white;
+    width: 938px;
+    margin: 26px auto 0;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.149);
+    height: auto;
+
+    &__header {
+        padding: 15px 16px 15px;
+    }
+
+    &__error {
+        width: 400px;
+        margin: 20px auto 0;
+    }
+
+    &__loader {
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        z-index: 999999;
+    }
+}
