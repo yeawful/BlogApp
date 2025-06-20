@@ -1,0 +1,119 @@
+@use '../../styles/variables' as *;
+
+.article {
+    background-color: $color-white;
+    width: $article-width;
+    height: 140px;
+    margin: 26px auto 26px;
+    box-shadow: $shadow-sm;
+    padding: $article-padding;
+
+    &Top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &TitleLikes {
+        display: flex;
+    }
+
+    &Label {
+        display: flex;
+        gap: 2px;
+    }
+
+    &CountCheck {
+        margin-top: 2px;
+    }
+
+    &Title {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: $font-size-xl;
+        line-height: $line-height-md;
+        margin-right: 13px;
+        color: $color-primary;
+    }
+
+    &CountCheck {
+        font-size: $font-size-sm;
+        line-height: $line-height-sm;
+        letter-spacing: 0;
+    }
+
+    &Autor {
+        margin: 0;
+    }
+
+    &RightSide {
+        display: flex;
+        align-items: center;
+    }
+
+    &GenresTags {
+        border: 1px solid $color-text-secondary;
+        border-radius: $border-radius-sm;
+        padding: 2px 5px;
+        color: $color-text-primary;
+        font-size: $font-size-xs;
+        margin-right: 6px;
+    }
+
+    &Description {
+        margin-top: 8px;
+        font-size: $font-size-xs;
+        line-height: $line-height-sm;
+        letter-spacing: 0;
+        color: $color-text-primary;
+        width: 682px;
+    }
+
+    &AutorDate {
+        margin-right: 12px;
+    }
+
+    &Autor {
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+    }
+
+    &Date {
+        font-size: $font-size-xs;
+        line-height: $line-height-sm;
+        color: $color-text-secondary;
+    }
+
+    &Img {
+        border-radius: 50%;
+    }
+
+    &Checkbox {
+        appearance: none;
+        height: 16px;
+        content: url('../../assets/icons/heart.svg');
+        margin-left: 13px;
+        transform: translate(0px, 2px);
+        margin-top: 3px;
+        margin-right: 4px;
+    }
+
+    &Checkbox:checked {
+        content: url('../../assets/icons/red_heart.svg');
+    }
+
+    &Body {
+        position: relative;
+        background-color: $color-white;
+        margin-top: 35px;
+        width: 930px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        font-size: $font-size-md;
+        right: 16px;
+        line-height: $line-height-md;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-shadow: $shadow-sm;
+    }
+}

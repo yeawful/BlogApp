@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *;
+
+.articlePost {
+    background-color: $color-white;
+    width: $article-width;
+    margin: 26px auto 0;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.149);
+    height: auto;
+
+    &Header {
+        padding: 15px 16px 15px;
+    }
+
+    &Error {
+        width: 400px;
+        margin: 20px auto 0;
+    }
+
+    &Loader {
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        z-index: $z-index-loader;
+    }
+}

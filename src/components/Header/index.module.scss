@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.header {
+    background-color: $color-white;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    height: $header-height;
+    align-items: center;
+    padding-inline: 22px;
+
+    &Title {
+        margin: 0;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        color: $color-black;
+    }
+
+    &Button {
+        display: flex;
+        align-items: center;
+    }
+
+    &SignInBtn {
+        color: $color-black;
+        border: none;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        cursor: pointer;
+    }
+
+    &SignUpBtn {
+        color: $color-success;
+        border: 1px solid $color-success;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        border-radius: $border-radius-md;
+        padding: 10px 18px;
+        margin-left: 19px;
+        cursor: pointer;
+    }
+}
