@@ -1,3 +1,4 @@
 build/
 node_modules/
 *.d.ts
+vite.config.ts

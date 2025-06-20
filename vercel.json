@@ -3,17 +3,25 @@
     "builds": [
         {
             "src": "package.json",
-            "use": "@vercel/static-build"
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "dist",
+                "installCommand": "npm install",
+                "buildCommand": "npm run build"
+            }
         }
     ],
     "routes": [
         {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
+            "src": "/assets/(.*)",
+            "dest": "/assets/$1"
         },
         {
             "src": "/(.*)",
-            "dest": "/index.html"
+            "dest": "/index.html",
+            "headers": {
+                "Cache-Control": "s-maxage=0, stale-while-revalidate=60"
+            }
         }
     ]
 }
