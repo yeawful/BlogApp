@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Markdown from 'markdown-to-jsx';
 import classes from './index.module.scss';
 import { ArticleType } from '../../types/ArticleInterfaces';
@@ -11,37 +11,37 @@ interface BlogProps {
 const Article = ({ article, isFullView = false }: BlogProps) => {
     return (
         <div className={classes.article}>
-            <div className={classes['article__top']}>
-                <div className={classes['article__left-side']}>
-                    <div className={classes['article__title-likes']}>
+            <div className={classes.articleTop}>
+                <div className={classes.articleLeftSide}>
+                    <div className={classes.articleTitleLikes}>
                         <Link to={`/articles/${article.slug}`}>
-                            <h1 className={classes['article__title']}>{article.title}</h1>
+                            <h1 className={classes.articleTitle}>{article.title}</h1>
                         </Link>
-                        <label htmlFor="heart" className={classes['article__label']}>
+                        <label htmlFor="heart" className={classes.articleLabel}>
                             <input
-                                className={classes['article__checkbox']}
+                                className={classes.articleCheckbox}
                                 type="checkbox"
                                 id="heart"
                             />
-                            <span className={classes['article__count-chek']}>
+                            <span className={classes.articleCountCheck}>
                                 {article.favoritesCount}
                             </span>
                         </label>
                     </div>
 
-                    <div className={classes['article__genres']}>
+                    <div className={classes.articleGenres}>
                         {article.tagList.map((tag, index) => (
-                            <span key={index} className={classes['article__genres_tags']}>
+                            <span key={index} className={classes.articleGenresTags}>
                                 {tag}
                             </span>
                         ))}
                     </div>
                 </div>
 
-                <div className={classes['article__right-side']}>
-                    <div className={classes['article__autor-date']}>
-                        <p className={classes['article__autor']}>{article.author.username}</p>
-                        <div className={classes['article__date']}>
+                <div className={classes.articleRightSide}>
+                    <div className={classes.articleAutorDate}>
+                        <p className={classes.articleAutor}>{article.author.username}</p>
+                        <div className={classes.articleDate}>
                             {new Date(article.createdAt).toLocaleDateString('en-US', {
                                 month: 'long',
                                 day: 'numeric',
@@ -50,7 +50,7 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                         </div>
                     </div>
                     <img
-                        className={classes['article__img']}
+                        className={classes.articleImg}
                         alt="Avatar"
                         src={article.author.image || '/avatar.svg'}
                         width="46"
@@ -58,11 +58,11 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                     />
                 </div>
             </div>
-            <div className={classes['article__description']}>
+            <div className={classes.articleDescription}>
                 {article.description}
 
                 {isFullView && (
-                    <div className={classes['article__body']}>
+                    <div className={classes.articleBody}>
                         <Markdown>{article.body}</Markdown>
                     </div>
                 )}

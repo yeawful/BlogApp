@@ -1,17 +1,20 @@
+@import '../../styles/variables.module';
+
+
 .articleList {
-    &__pagination {
+    &Pagination {
         justify-content: center;
         margin-bottom: 30px;
     }
 
-    &__loader {
+    &Loader {
         position: absolute;
         left: 50%;
         top: 100px;
-        z-index: 999999;
+        z-index: $z-index-loader;
     }
 
-    &__error {
+    &Error {
         width: 400px;
         margin: 20px auto 0;
     }
@@ -19,14 +22,14 @@
     :global {
         .ant-pagination {
             &-item-active {
-                background: #1890ff !important;
+                background: $color-primary !important;
 
                 a,
                 &:link a,
                 &:visited a,
                 &:hover a,
                 &:focus a {
-                    color: #ffffff !important;
+                    color: $color-white !important;
                 }
             }
         }

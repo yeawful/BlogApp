@@ -1,91 +1,94 @@
+@import '../../styles/variables.module';
+
+
 .article {
-    background-color: white;
-    width: 938px;
+    background-color: $color-white;
+    width: $article-width;
     height: 140px;
     margin: 26px auto 26px;
-    box-shadow: 0 4px 12px #00000026;
-    padding: 15px 16px 15px;
+    box-shadow: $shadow-sm;
+    padding: $article-padding;
 
-    &__top {
+    &Top {
         display: flex;
         justify-content: space-between;
     }
 
-    &__title-likes {
+    &TitleLikes {
         display: flex;
     }
 
-    &__label {
+    &Label {
         display: flex;
         gap: 2px;
     }
 
-    &__count-chek {
+    &CountCheck {
         margin-top: 2px;
     }
 
-    &__title {
+    &Title {
         margin-top: 0;
         margin-bottom: 8px;
-        font-size: 20px;
-        line-height: 28px;
+        font-size: $font-size-xl;
+        line-height: $line-height-md;
         margin-right: 13px;
-        color: #1890ff;
+        color: $color-primary;
     }
 
-    &__count-chek {
-        font-size: 14px;
-        line-height: 22px;
+    &CountCheck {
+        font-size: $font-size-sm;
+        line-height: $line-height-sm;
         letter-spacing: 0;
     }
 
-    &__autor {
+    &Autor {
         margin: 0;
     }
 
-    &__right-side {
+    &RightSide {
         display: flex;
         align-items: center;
     }
 
-    &__genres_tags {
-        border: 1px solid #717171;
-        border-radius: 2px;
+    &GenresTags {
+        border: 1px solid $color-text-secondary;
+        border-radius: $border-radius-sm;
         padding: 2px 5px;
-        color: #393939;
-        font-size: 12px;
+        color: $color-text-primary;
+        font-size: $font-size-xs;
         margin-right: 6px;
     }
 
-    &__description {
+    &Description {
         margin-top: 8px;
-        font-size: 12px;
-        line-height: 22px;
+        font-size: $font-size-xs;
+        line-height: $line-height-sm;
         letter-spacing: 0;
-        color: #393939;
+        color: $color-text-primary;
         width: 682px;
     }
 
-    &__autor-date {
+    &AutorDate {
         margin-right: 12px;
     }
 
-    &__autor {
-        font-size: 18px;
-        line-height: 28px;
+    &Autor {
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
     }
 
-    &__date {
-        font-size: 12px;
-        line-height: 22px;
-        color: #717171;
+    &Date {
+        font-size: $font-size-xs;
+        line-height: $line-height-sm;
+        color: $color-text-secondary;
     }
 
-    &__img {
+    &Img {
         border-radius: 50%;
     }
 
-    &__checkbox {
+    &Checkbox {
         appearance: none;
         height: 16px;
         content: url('../../assets/icons/heart.svg');
@@ -95,23 +98,23 @@
         margin-right: 4px;
     }
 
-    &__checkbox:checked {
+    &Checkbox:checked {
         content: url('../../assets/icons/red_heart.svg');
     }
 
-    &__body {
+    &Body {
         position: relative;
-        background-color: #fff;
+        background-color: $color-white;
         margin-top: 35px;
         width: 930px;
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 20px;
-        font-size: 16px;
+        font-size: $font-size-md;
         right: 16px;
-        line-height: 28px;
+        line-height: $line-height-md;
         overflow: hidden;
         text-overflow: ellipsis;
-        box-shadow: 0 4px 12px #00000026;
+        box-shadow: $shadow-sm;
     }
 }

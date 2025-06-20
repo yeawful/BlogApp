@@ -1,35 +1,43 @@
+@import '../../styles/variables.module';
+
+
 .header {
-    background-color: white;
+    background-color: $color-white;
     margin: 0;
     display: flex;
     justify-content: space-between;
-    height: 80px;
+    height: $header-height;
     align-items: center;
     padding-inline: 22px;
 
-    &__title {
+    &Title {
         margin: 0;
-        font-size: 18px;
-        line-height: 28px;
-        color: black;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        color: $color-black;
     }
 
-    &__sign-in-btn {
-        color: black;
+    &Button {
+        display: flex;
+        align-items: center;
+    }
+
+    &SignInBtn {
+        color: $color-black;
         border: none;
-        background-color: white;
-        font-size: 18px;
-        line-height: 28px;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
         cursor: pointer;
     }
 
-    &__sign-up-btn {
-        color: #52c41a;
-        border: 1px solid #52c41a;
-        background-color: white;
-        font-size: 18px;
-        line-height: 28px;
-        border-radius: 5px;
+    &SignUpBtn {
+        color: $color-success;
+        border: 1px solid $color-success;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        border-radius: $border-radius-md;
         padding: 10px 18px;
         margin-left: 19px;
         cursor: pointer;

@@ -19,7 +19,7 @@ const ArticlePost = () => {
 
     if (isLoading === true) {
         return (
-            <div className={classes['articlePost__loader']}>
+            <div className={classes.articlePostLoader}>
                 <Spin size="large" />
             </div>
         );
@@ -30,7 +30,7 @@ const ArticlePost = () => {
             <Alert
                 description="Что-то пошло не так"
                 type="error"
-                className={classes['articlePost__error']}
+                className={classes.articlePostError}
             />
         );
     }

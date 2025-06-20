@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import { Pagination, Alert, Spin } from 'antd';
 import classes from './index.module.scss';
 import Article from '../Article';
@@ -36,7 +36,7 @@ const ArticleList = () => {
 
     if (isLoading) {
         return (
-            <div className={classes['articleList__loader']}>
+            <div className={classes.articleListLoader}>
                 <Spin size="large" />
             </div>
         );
@@ -47,7 +47,7 @@ const ArticleList = () => {
             <Alert
                 description="Что-то пошло не так"
                 type="error"
-                className={classes['articleList__error']}
+                className={classes.articleListError}
             />
         );
     }
@@ -60,7 +60,7 @@ const ArticleList = () => {
                 ))}
 
                 <Pagination
-                    className={classes['articleList__pagination']}
+                    className={classes.articleListPagination}
                     current={currentPage}
                     total={totalArticles}
                     pageSize={5}
