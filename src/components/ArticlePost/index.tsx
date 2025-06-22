@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/store';
 import { useParams } from 'react-router';
-import { fetchArticle } from '../../store/ArticleSlice';
-import { Alert, Spin } from 'antd';
-import classes from './index.module.scss';
 import Article from '../Article';
+import Loader from '../Loader';
+import ErrorAlert from '../ErrorAlert';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchArticle } from '../../store/ArticleSlice';
 
 const ArticlePost = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -18,21 +18,11 @@ const ArticlePost = () => {
     }, [dispatch, slug]);
 
     if (isLoading === true) {
-        return (
-            <div className={classes.articlePostLoader}>
-                <Spin size="large" />
-            </div>
-        );
+        return <Loader />;
     }
 
     if (error || !currentArticle) {
-        return (
-            <Alert
-                description="Что-то пошло не так"
-                type="error"
-                className={classes.articlePostError}
-            />
-        );
+        return <ErrorAlert />;
     }
 
     return <Article article={currentArticle} isFullView />;

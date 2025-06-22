@@ -3,8 +3,16 @@ import { ArticleType, ArticleFilters, ArticlesResponse } from '../types/ArticleI
 
 const apiBaseUrl = 'https://blog-platform.kata.academy/api';
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
     baseURL: apiBaseUrl,
+});
+
+apiClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Token ${token}`;
+    }
+    return config;
 });
 
 export const fetchArticlesApi = async (params: ArticleFilters): Promise<ArticlesResponse> => {

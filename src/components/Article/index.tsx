@@ -17,12 +17,8 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                         <Link to={`/articles/${article.slug}`}>
                             <h1 className={classes.articleTitle}>{article.title}</h1>
                         </Link>
-                        <label htmlFor="heart" className={classes.articleLabel}>
-                            <input
-                                className={classes.articleCheckbox}
-                                type="checkbox"
-                                id="heart"
-                            />
+                        <label className={classes.articleLabel}>
+                            <input className={classes.articleCheckbox} type="checkbox" id="heart" />
                             <span className={classes.articleCountCheck}>
                                 {article.favoritesCount}
                             </span>
