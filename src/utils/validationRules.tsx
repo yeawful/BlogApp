@@ -1,90 +1,90 @@
 export const validationRules = {
     register: {
         username: {
-            required: 'Имя пользователя обязательно',
+            required: "Имя пользователя обязательно",
             minLength: {
                 value: 3,
-                message: 'Минимум 3 символа',
+                message: "Минимум 3 символа",
             },
             maxLength: {
                 value: 20,
-                message: 'Максимум 20 символов',
+                message: "Максимум 20 символов",
             },
         },
         email: {
-            required: 'Email обязателен',
+            required: "Email обязателен",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Некорректный email',
+                message: "Некорректный email",
             },
         },
         password: {
-            required: 'Пароль обязателен',
+            required: "Пароль обязателен",
             minLength: {
                 value: 6,
-                message: 'Минимум 6 символов',
+                message: "Минимум 6 символов",
             },
             maxLength: {
                 value: 40,
-                message: 'Максимум 40 символов',
+                message: "Максимум 40 символов",
             },
         },
         repeatPassword: (password: string) => ({
-            required: 'Повторите пароль',
+            required: "Повторите пароль",
             validate: {
                 matchesPassword: (value: string | undefined) =>
-                    value === password || 'Пароли не совпадают',
+                    value === password || "Пароли не совпадают",
             },
         }),
         acceptTerms: {
-            required: 'Необходимо согласие с обработкой данных',
+            required: "Необходимо согласие с обработкой данных",
         },
     },
 
     login: {
         email: {
-            required: 'Email обязателен',
+            required: "Email обязателен",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Некорректный email',
+                message: "Некорректный email",
             },
         },
         password: {
-            required: 'Пароль обязателен',
+            required: "Пароль обязателен",
         },
     },
 
     profile: {
         username: {
-            required: 'Имя пользователя обязательно',
+            required: "Имя пользователя обязательно",
         },
         email: {
-            required: 'Email обязателен',
+            required: "Email обязателен",
             pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Некорректный email',
+                message: "Некорректный email",
             },
         },
         password: {
             minLength: {
                 value: 6,
-                message: 'Минимум 6 символов',
+                message: "Минимум 6 символов",
             },
             maxLength: {
                 value: 40,
-                message: 'Максимум 40 символов',
+                message: "Максимум 40 символов",
             },
         },
         image: {
             pattern: {
                 value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i,
-                message: 'Некорректный URL',
+                message: "Некорректный URL",
             },
             validate: (value: string | null | undefined) => {
-                if (value === null || value === undefined || value === '') return true;
+                if (value === null || value === undefined || value === "") return true;
                 return (
                     /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(value) ||
-                    'Некорректный URL'
+                    "Некорректный URL"
                 );
             },
         },

@@ -1,13 +1,15 @@
-import axios from 'axios';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "axios";
+
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { getCurrentUserApi, loginUserApi, registerUserApi, updateUserApi } from "../api/userApi";
 import {
-    RegisterRequest,
-    UserState,
     LoginRequest,
+    RegisterRequest,
     UpdateUserRequest,
-} from '../types/UserInterfaces';
-import { registerUserApi, loginUserApi, getCurrentUserApi, updateUserApi } from '../api/userApi';
-import { saveToken, getToken, removeToken } from '../utils/encryptUtils';
+    UserState,
+} from "../types/UserInterfaces";
+import { getToken, removeToken, saveToken } from "../utils/encryptUtils";
 
 const initialState: UserState = {
     user: null,
@@ -27,17 +29,17 @@ const handleApiError = (error: unknown) => {
             const errors = error.response.data as ApiErrorResponse;
             if (errors?.errors) {
                 return Object.entries(errors.errors)
-                    .map(([field, fieldErrors]) => `${field}: ${fieldErrors.join(', ')}`)
-                    .join('; ');
+                    .map(([field, fieldErrors]) => `${field}: ${fieldErrors.join(", ")}`)
+                    .join("; ");
             }
-            return 'Проверьте правильность введенных данных';
+            return "Проверьте правильность введенных данных";
         }
-        return error.response?.data?.message || 'Произошла ошибка при выполнении запроса';
+        return error.response?.data?.message || "Произошла ошибка при выполнении запроса";
     }
-    return 'Произошла неизвестная ошибка';
+    return "Произошла неизвестная ошибка";
 };
 
-export const loginUser = createAsyncThunk('user/login', async (data: LoginRequest) => {
+export const loginUser = createAsyncThunk("user/login", async (data: LoginRequest) => {
     try {
         const response = await loginUserApi(data);
         saveToken(response.user.token);
@@ -47,7 +49,7 @@ export const loginUser = createAsyncThunk('user/login', async (data: LoginReques
     }
 });
 
-export const registerUser = createAsyncThunk('user/register', async (data: RegisterRequest) => {
+export const registerUser = createAsyncThunk("user/register", async (data: RegisterRequest) => {
     try {
         const res = await registerUserApi(data);
         saveToken(res.user.token);
@@ -57,25 +59,25 @@ export const registerUser = createAsyncThunk('user/register', async (data: Regis
     }
 });
 
-export const fetchCurrentUser = createAsyncThunk('user/fetchCurrentUser', async () => {
+export const fetchCurrentUser = createAsyncThunk("user/fetchCurrentUser", async () => {
     try {
         const token = getToken();
-        if (!token) throw new Error('No token found');
+        if (!token) throw new Error("No token found");
 
         const response = await getCurrentUserApi(token);
         return response.user;
     } catch (error) {
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
         throw handleApiError(error);
     }
 });
 
 export const updateUserProfile = createAsyncThunk(
-    'user/update',
+    "user/update",
     async (data: UpdateUserRequest) => {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) throw new Error('No token found');
+            const token = localStorage.getItem("token");
+            if (!token) throw new Error("No token found");
 
             const payload = {
                 ...(data.username && { username: data.username }),
@@ -93,7 +95,7 @@ export const updateUserProfile = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         logout: (state) => {
@@ -115,7 +117,7 @@ const userSlice = createSlice({
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Ошибка авторизации';
+                state.error = action.error.message || "Ошибка авторизации";
             })
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true;
@@ -127,7 +129,7 @@ const userSlice = createSlice({
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Ошибка регистрации';
+                state.error = action.error.message || "Ошибка регистрации";
             })
             .addCase(fetchCurrentUser.pending, (state) => {
                 state.isLoading = true;
@@ -139,7 +141,7 @@ const userSlice = createSlice({
             })
             .addCase(fetchCurrentUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Ошибка загрузки пользователя';
+                state.error = action.error.message || "Ошибка загрузки пользователя";
             })
             .addCase(updateUserProfile.pending, (state) => {
                 state.isLoading = true;
@@ -151,7 +153,7 @@ const userSlice = createSlice({
             })
             .addCase(updateUserProfile.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Ошибка обновления профиля';
+                state.error = action.error.message || "Ошибка обновления профиля";
             });
     },
 });

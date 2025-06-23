@@ -1,10 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
-import Initializer from '../Initializer';
-import Header from '../Header';
-import ArticleList from '../ArticleList';
-import ArticlePost from '../ArticlePost';
-import Sign from '../Sign';
-import Profile from '../Profile';
+import { Route, Routes } from "react-router-dom";
+
+import ArticleList from "../ArticleList";
+import ArticlePost from "../ArticlePost";
+import Header from "../Header";
+import Initializer from "../Initializer";
+import Profile from "../Profile";
+import Sign from "../Sign";
 
 const App = () => {
     return (

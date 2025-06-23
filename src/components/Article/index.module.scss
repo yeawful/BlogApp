@@ -1,4 +1,4 @@
-@use '@/styles/variables' as *;
+@use "@/styles/variables" as *;
 
 .article {
     background-color: $color-white;
@@ -90,7 +90,7 @@
     &Checkbox {
         appearance: none;
         height: 16px;
-        content: url('../../assets/icons/heart.svg');
+        content: url("../../assets/icons/heart.svg");
         margin-left: 13px;
         transform: translate(0px, 2px);
         margin-top: 3px;
@@ -98,7 +98,7 @@
     }
 
     &Checkbox:checked {
-        content: url('../../assets/icons/red_heart.svg');
+        content: url("../../assets/icons/red_heart.svg");
     }
 
     &Body {

@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { Input, Button, Alert, Form, Typography } from 'antd';
-import classes from './index.module.scss';
-import Loader from '../Loader';
-import ErrorAlert from '../ErrorAlert';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { updateUserProfile, fetchCurrentUser } from '../../store/UserSlice';
-import { validationRules } from '../../utils/validationRules';
-import { ProfileFormData } from '../../types/UserInterfaces';
+import { useEffect } from "react";
+
+import { Alert, Button, Form, Input, Typography } from "antd";
+import { Controller, useForm } from "react-hook-form";
+
+import { fetchCurrentUser, updateUserProfile } from "../../store/UserSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { ProfileFormData } from "../../types/UserInterfaces";
+import { validationRules } from "../../utils/validationRules";
+import ErrorAlert from "../ErrorAlert";
+import Loader from "../Loader";
+import classes from "./index.module.scss";
 
 const { Title } = Typography;
 
@@ -21,7 +23,7 @@ const Profile = () => {
         formState: { touchedFields, isDirty },
         reset,
     } = useForm<ProfileFormData>({
-        mode: 'onBlur',
+        mode: "onBlur",
     });
 
     useEffect(() => {
@@ -31,8 +33,8 @@ const Profile = () => {
             reset({
                 username: user.username,
                 email: user.email,
-                password: '',
-                image: user.image || '',
+                password: "",
+                image: user.image || "",
             });
         }
     }, [user, dispatch, reset]);
@@ -74,7 +76,7 @@ const Profile = () => {
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.username ? 'error' : ''
+                                fieldState.error && touchedFields.username ? "error" : ""
                             }
                             help={touchedFields.username && fieldState.error?.message}
                         >
@@ -89,7 +91,7 @@ const Profile = () => {
                     rules={validationRules.profile.email}
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.email ? 'error' : ''}
+                            validateStatus={fieldState.error && touchedFields.email ? "error" : ""}
                             help={touchedFields.email && fieldState.error?.message}
                         >
                             <Input placeholder="Email" type="email" {...field} />
@@ -104,7 +106,7 @@ const Profile = () => {
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.password ? 'error' : ''
+                                fieldState.error && touchedFields.password ? "error" : ""
                             }
                             help={touchedFields.password && fieldState.error?.message}
                         >
@@ -119,13 +121,13 @@ const Profile = () => {
                     rules={validationRules.profile.image}
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.image ? 'error' : ''}
+                            validateStatus={fieldState.error && touchedFields.image ? "error" : ""}
                             help={touchedFields.image && fieldState.error?.message}
                         >
                             <Input
                                 placeholder="Аватар (URL)"
                                 {...field}
-                                value={field.value || ''}
+                                value={field.value || ""}
                             />
                         </Form.Item>
                     )}

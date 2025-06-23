@@ -1,5 +1,6 @@
-import { Spin } from 'antd';
-import classes from './index.module.scss';
+import { Spin } from "antd";
+
+import classes from "./index.module.scss";
 
 const Loader = () => {
     return (

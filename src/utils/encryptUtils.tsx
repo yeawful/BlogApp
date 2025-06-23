@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'Tralalelo Tralala';
+const TOKEN_KEY = "Tralalelo Tralala";
 
 const encryptToken = (token: string): string => {
     return btoa(token);

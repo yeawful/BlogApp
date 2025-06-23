@@ -3,7 +3,7 @@ export interface User {
     token: string;
     username: string;
     bio?: string;
-    image?: string;
+    image?: string | null;
 }
 
 export interface UserState {
@@ -40,7 +40,7 @@ export interface AuthFormData {
 }
 
 export interface AuthFormProps {
-    mode: 'login' | 'register';
+    mode: "login" | "register";
 }
 
 export interface ProfileFormData {

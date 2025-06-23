@@ -1,11 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
-import { registerUser, loginUser } from '../../store/UserSlice';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { Alert, Button, Checkbox, Form, Input, Typography } from 'antd';
-import classes from './index.module.scss';
-import { validationRules } from '../../utils/validationRules';
-import { AuthFormData, AuthFormProps } from '../../types/UserInterfaces';
+import { Alert, Button, Checkbox, Form, Input, Typography } from "antd";
+import { Controller, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+
+import { loginUser, registerUser } from "../../store/UserSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { AuthFormData, AuthFormProps } from "../../types/UserInterfaces";
+import { validationRules } from "../../utils/validationRules";
+import classes from "./index.module.scss";
 
 const { Text } = Typography;
 
@@ -20,7 +21,7 @@ const Sign = ({ mode }: AuthFormProps) => {
         watch,
         formState: { touchedFields },
     } = useForm<AuthFormData>({
-        mode: 'onBlur',
+        mode: "onBlur",
         defaultValues: {
             acceptTerms: false,
         },
@@ -28,7 +29,7 @@ const Sign = ({ mode }: AuthFormProps) => {
 
     const onSubmitHandle = async (data: AuthFormData) => {
         try {
-            if (mode === 'login') {
+            if (mode === "login") {
                 const res = await dispatch(
                     loginUser({
                         email: data.email,
@@ -36,7 +37,7 @@ const Sign = ({ mode }: AuthFormProps) => {
                     }),
                 ).unwrap();
                 if (res) {
-                    navigate('/');
+                    navigate("/");
                 }
             } else {
                 const res = await dispatch(
@@ -47,24 +48,24 @@ const Sign = ({ mode }: AuthFormProps) => {
                     }),
                 ).unwrap();
                 if (res) {
-                    navigate('/');
+                    navigate("/");
                 }
             }
         } catch (error) {
-            console.error('Authentication failed:', error);
+            console.error("Authentication failed:", error);
         }
     };
 
     return (
         <div className={classes.sign}>
             <Typography.Title level={2} className={classes.title}>
-                {mode === 'login' ? 'Вход' : 'Создать аккаунт'}
+                {mode === "login" ? "Вход" : "Создать аккаунт"}
             </Typography.Title>
 
             {error && <Alert message={error} type="error" className={classes.error} />}
 
             <form className={classes.form} onSubmit={handleSubmit(onSubmitHandle)}>
-                {mode === 'register' && (
+                {mode === "register" && (
                     <Controller
                         name="username"
                         control={control}
@@ -72,7 +73,7 @@ const Sign = ({ mode }: AuthFormProps) => {
                         render={({ field, fieldState }) => (
                             <Form.Item
                                 validateStatus={
-                                    fieldState.error && touchedFields.username ? 'error' : ''
+                                    fieldState.error && touchedFields.username ? "error" : ""
                                 }
                                 help={touchedFields.username && fieldState.error?.message}
                             >
@@ -86,13 +87,13 @@ const Sign = ({ mode }: AuthFormProps) => {
                     name="email"
                     control={control}
                     rules={
-                        mode === 'login'
+                        mode === "login"
                             ? validationRules.login.email
                             : validationRules.register.email
                     }
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.email ? 'error' : ''}
+                            validateStatus={fieldState.error && touchedFields.email ? "error" : ""}
                             help={touchedFields.email && fieldState.error?.message}
                         >
                             <Input placeholder="Email" type="email" {...field} />
@@ -104,14 +105,14 @@ const Sign = ({ mode }: AuthFormProps) => {
                     name="password"
                     control={control}
                     rules={
-                        mode === 'login'
+                        mode === "login"
                             ? validationRules.login.password
                             : validationRules.register.password
                     }
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.password ? 'error' : ''
+                                fieldState.error && touchedFields.password ? "error" : ""
                             }
                             help={touchedFields.password && fieldState.error?.message}
                         >
@@ -120,18 +121,18 @@ const Sign = ({ mode }: AuthFormProps) => {
                     )}
                 />
 
-                {mode === 'register' && (
+                {mode === "register" && (
                     <>
                         <Controller
                             name="repeatPassword"
                             control={control}
-                            rules={validationRules.register.repeatPassword(watch('password'))}
+                            rules={validationRules.register.repeatPassword(watch("password"))}
                             render={({ field, fieldState }) => (
                                 <Form.Item
                                     validateStatus={
                                         fieldState.error && touchedFields.repeatPassword
-                                            ? 'error'
-                                            : ''
+                                            ? "error"
+                                            : ""
                                     }
                                     help={touchedFields.repeatPassword && fieldState.error?.message}
                                 >
@@ -147,7 +148,7 @@ const Sign = ({ mode }: AuthFormProps) => {
                             render={({ field, fieldState }) => (
                                 <Form.Item
                                     validateStatus={
-                                        fieldState.error && touchedFields.acceptTerms ? 'error' : ''
+                                        fieldState.error && touchedFields.acceptTerms ? "error" : ""
                                     }
                                     help={touchedFields.acceptTerms && fieldState.error?.message}
                                 >
@@ -171,20 +172,20 @@ const Sign = ({ mode }: AuthFormProps) => {
                     loading={isLoading}
                     disabled={isLoading}
                 >
-                    {mode === 'login' ? 'Войти' : 'Зарегистрироваться'}
+                    {mode === "login" ? "Войти" : "Зарегистрироваться"}
                 </Button>
 
                 <Text className={classes.question}>
-                    {mode === 'login' ? (
+                    {mode === "login" ? (
                         <>
-                            Нет аккаунта?{' '}
+                            Нет аккаунта?{" "}
                             <Link className={classes.link} to="/sign-up">
                                 Зарегистрируйтесь.
                             </Link>
                         </>
                     ) : (
                         <>
-                            Уже есть аккаунт?{' '}
+                            Уже есть аккаунт?{" "}
                             <Link className={classes.link} to="/sign-in">
                                 Войдите.
                             </Link>

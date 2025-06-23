@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router';
-import Article from '../Article';
-import Loader from '../Loader';
-import ErrorAlert from '../ErrorAlert';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchArticle } from '../../store/ArticleSlice';
+import { useEffect } from "react";
+
+import { useParams } from "react-router";
+
+import { fetchArticle } from "../../store/ArticleSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import Article from "../Article";
+import ErrorAlert from "../ErrorAlert";
+import Loader from "../Loader";
 
 const ArticlePost = () => {
     const { slug } = useParams<{ slug: string }>();

@@ -1,8 +1,9 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import classes from './index.module.scss';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { logout } from '../../store/UserSlice';
-import Avatar from '../../assets/icons/avatar.svg';
+import { Link, Outlet, useNavigate } from "react-router-dom";
+
+import Avatar from "../../assets/icons/avatar.svg";
+import { logout } from "../../store/UserSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import classes from "./index.module.scss";
 
 const Header = () => {
     const dispatch = useAppDispatch();
@@ -11,7 +12,7 @@ const Header = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/');
+        navigate("/");
     };
 
     return (
@@ -31,7 +32,8 @@ const Header = () => {
                                         alt="Avatar"
                                         className={classes.avatar}
                                         onError={(e) => {
-                                            (e.target as HTMLImageElement).src = Avatar;
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = Avatar;
                                         }}
                                     />
                                 </button>

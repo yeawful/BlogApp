@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchArticle as fetchArticleApi, fetchArticlesApi } from '../api/articlesApi';
-import { ArticleType, ArticlesResponse, ArticlesState } from '../types/ArticleInterfaces';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { fetchArticle as fetchArticleApi, fetchArticlesApi } from "../api/articlesApi";
+import { ArticleType, ArticlesResponse, ArticlesState } from "../types/ArticleInterfaces";
 
 interface FetchArticlesParams {
     limit: number;
@@ -17,14 +18,14 @@ const initialState: ArticlesState = {
 };
 
 export const fetchArticles = createAsyncThunk<ArticlesResponse, FetchArticlesParams>(
-    'articles/fetchArticles',
+    "articles/fetchArticles",
     async ({ limit, offset }) => {
         return await fetchArticlesApi({ limit, offset });
     },
 );
 
 export const fetchArticle = createAsyncThunk<ArticleType, string>(
-    'articles/fetchArticle',
+    "articles/fetchArticle",
     async (slug) => {
         const response = await fetchArticleApi(slug);
         return response.article;
@@ -32,7 +33,7 @@ export const fetchArticle = createAsyncThunk<ArticleType, string>(
 );
 
 const articlesSlice = createSlice({
-    name: 'articles',
+    name: "articles",
     initialState,
     reducers: {
         setCurrentPage(state, action) {
@@ -53,7 +54,7 @@ const articlesSlice = createSlice({
             })
             .addCase(fetchArticles.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не удалось получить статьи';
+                state.error = action.error.message || "Не удалось получить статьи";
                 state.articles = [];
                 state.totalArticles = 0;
             })
@@ -66,7 +67,7 @@ const articlesSlice = createSlice({
             })
             .addCase(fetchArticle.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не удалось получить статью';
+                state.error = action.error.message || "Не удалось получить статью";
             });
     },
 });

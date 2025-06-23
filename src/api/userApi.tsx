@@ -1,13 +1,13 @@
-import { apiClient } from './articlesApi';
-import { User, RegisterRequest, LoginRequest, UpdateUserRequest } from '../types/UserInterfaces';
-import Avatar from '../assets/icons/avatar.svg';
+import Avatar from "../assets/icons/avatar.svg";
+import { LoginRequest, RegisterRequest, UpdateUserRequest, User } from "../types/UserInterfaces";
+import { apiClient } from "./articlesApi";
 
 interface UserResponse {
     user: User;
 }
 
 export const loginUserApi = async (data: LoginRequest): Promise<UserResponse> => {
-    const response = await apiClient.post<UserResponse>('/users/login', {
+    const response = await apiClient.post<UserResponse>("/users/login", {
         user: {
             email: data.email,
             password: data.password,
@@ -17,7 +17,7 @@ export const loginUserApi = async (data: LoginRequest): Promise<UserResponse> =>
 };
 
 export const registerUserApi = async (data: RegisterRequest): Promise<UserResponse> => {
-    const response = await apiClient.post<UserResponse>('/users', {
+    const response = await apiClient.post<UserResponse>("/users", {
         user: {
             username: data.username,
             email: data.email,
@@ -29,7 +29,7 @@ export const registerUserApi = async (data: RegisterRequest): Promise<UserRespon
 };
 
 export const getCurrentUserApi = async (token: string): Promise<UserResponse> => {
-    const response = await apiClient.get<UserResponse>('/user', {
+    const response = await apiClient.get<UserResponse>("/user", {
         headers: {
             Authorization: `Token ${token}`,
         },
@@ -49,7 +49,7 @@ export const updateUserApi = async (
     if (data.image !== undefined) userData.image = data.image;
 
     const response = await apiClient.put<UserResponse>(
-        '/user',
+        "/user",
         { user: userData },
         {
             headers: {

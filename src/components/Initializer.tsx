@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
-import { useAppDispatch } from '../store/store';
-import { fetchCurrentUser } from '../store/UserSlice';
-import { getToken } from '../utils/encryptUtils';
+import { useEffect } from "react";
+
+import { fetchCurrentUser } from "../store/UserSlice";
+import { useAppDispatch } from "../store/store";
+import { getToken } from "../utils/encryptUtils";
 
 const Initializer = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
