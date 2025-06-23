@@ -8,9 +8,8 @@ export interface User {
 
 export interface UserState {
     user: User | null;
-    isLoading: 'i' | 'loading' | 'succeeded' | 'failed';
+    isLoading: boolean;
     error: string | null;
-    isInitializing: boolean;
 }
 
 export interface LoginRequest {

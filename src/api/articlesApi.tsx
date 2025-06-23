@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ArticleType, ArticleFilters, ArticlesResponse } from '../types/ArticleInterfaces';
+import { getToken } from '../utils/encryptUtils';
 
 const apiBaseUrl = 'https://blog-platform.kata.academy/api';
 
@@ -8,7 +9,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (token) {
         config.headers.Authorization = `Token ${token}`;
     }

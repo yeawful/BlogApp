@@ -168,8 +168,8 @@ const Sign = ({ mode }: AuthFormProps) => {
                     type="primary"
                     htmlType="submit"
                     className={classes.button}
-                    loading={isLoading === 'loading'}
-                    disabled={isLoading === 'loading'}
+                    loading={isLoading}
+                    disabled={isLoading}
                 >
                     {mode === 'login' ? 'Войти' : 'Зарегистрироваться'}
                 </Button>

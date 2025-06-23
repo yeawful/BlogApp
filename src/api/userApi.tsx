@@ -41,7 +41,8 @@ export const updateUserApi = async (
     data: UpdateUserRequest,
     token: string,
 ): Promise<UserResponse> => {
-    const userData: Record<string, any> = {};
+    const userData: Partial<UpdateUserRequest> = {};
+
     if (data.username !== undefined) userData.username = data.username;
     if (data.email !== undefined) userData.email = data.email;
     if (data.password !== undefined) userData.password = data.password;
@@ -49,9 +50,7 @@ export const updateUserApi = async (
 
     const response = await apiClient.put<UserResponse>(
         '/user',
-        {
-            user: userData,
-        },
+        { user: userData },
         {
             headers: {
                 Authorization: `Token ${token}`,

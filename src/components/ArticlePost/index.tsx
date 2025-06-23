@@ -17,7 +17,7 @@ const ArticlePost = () => {
         }
     }, [dispatch, slug]);
 
-    if (isLoading === true) {
+    if (isLoading) {
         return <Loader />;
     }
 

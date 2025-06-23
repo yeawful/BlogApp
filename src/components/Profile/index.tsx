@@ -50,7 +50,7 @@ const Profile = () => {
         }
     };
 
-    if (isLoading === 'loading' && !user) {
+    if (isLoading && !user) {
         return <Loader />;
     }
 
@@ -136,8 +136,8 @@ const Profile = () => {
                         type="primary"
                         htmlType="submit"
                         className={classes.button}
-                        loading={isLoading === 'loading'}
-                        disabled={isLoading === 'loading' || !isDirty}
+                        loading={isLoading}
+                        disabled={isLoading || !isDirty}
                     >
                         Сохранить
                     </Button>
