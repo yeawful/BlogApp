@@ -67,7 +67,7 @@ export const fetchCurrentUser = createAsyncThunk("user/fetchCurrentUser", async 
         const response = await getCurrentUserApi(token);
         return response.user;
     } catch (error) {
-        localStorage.removeItem("token");
+        removeToken();
         throw handleApiError(error);
     }
 });
@@ -76,7 +76,7 @@ export const updateUserProfile = createAsyncThunk(
     "user/update",
     async (data: UpdateUserRequest) => {
         try {
-            const token = localStorage.getItem("token");
+            const token = getToken();
             if (!token) throw new Error("No token found");
 
             const payload = {

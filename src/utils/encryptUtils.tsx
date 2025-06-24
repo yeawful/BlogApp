@@ -1,4 +1,4 @@
-const TOKEN_KEY = "Tralalelo Tralala";
+import { TOKEN_KEY } from "../constants/auth";
 
 const encryptToken = (token: string): string => {
     return btoa(token);
