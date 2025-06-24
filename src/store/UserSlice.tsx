@@ -59,11 +59,8 @@ export const registerUser = createAsyncThunk("user/register", async (data: Regis
     }
 });
 
-export const fetchCurrentUser = createAsyncThunk("user/fetchCurrentUser", async () => {
+export const fetchCurrentUser = createAsyncThunk("user/fetchCurrentUser", async (token: string) => {
     try {
-        const token = getToken();
-        if (!token) throw new Error("No token found");
-
         const response = await getCurrentUserApi(token);
         return response.user;
     } catch (error) {
