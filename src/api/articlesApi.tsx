@@ -1,14 +1,24 @@
-import axios from 'axios';
-import { ArticleType, ArticleFilters, ArticlesResponse } from '../types/ArticleInterfaces';
+import axios from "axios";
 
-const apiBaseUrl = 'https://blog-platform.kata.academy/api';
+import { ArticleFilters, ArticleType, ArticlesResponse } from "../types/ArticleInterfaces";
+import { getToken } from "../utils/encryptUtils";
 
-const apiClient = axios.create({
+const apiBaseUrl = "https://blog-platform.kata.academy/api";
+
+export const apiClient = axios.create({
     baseURL: apiBaseUrl,
 });
 
+apiClient.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+        config.headers.Authorization = `Token ${token}`;
+    }
+    return config;
+});
+
 export const fetchArticlesApi = async (params: ArticleFilters): Promise<ArticlesResponse> => {
-    const response = await apiClient.get<ArticlesResponse>('/articles', { params });
+    const response = await apiClient.get<ArticlesResponse>("/articles", { params });
     return response.data;
 };
 

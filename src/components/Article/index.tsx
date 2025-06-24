@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
-import Markdown from 'markdown-to-jsx';
-import classes from './index.module.scss';
-import { ArticleType } from '../../types/ArticleInterfaces';
+import Markdown from "markdown-to-jsx";
+import { Link } from "react-router-dom";
+
+import { ArticleType } from "../../types/ArticleInterfaces";
+import classes from "./index.module.scss";
 
 interface BlogProps {
     article: ArticleType;
@@ -17,12 +18,8 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                         <Link to={`/articles/${article.slug}`}>
                             <h1 className={classes.articleTitle}>{article.title}</h1>
                         </Link>
-                        <label htmlFor="heart" className={classes.articleLabel}>
-                            <input
-                                className={classes.articleCheckbox}
-                                type="checkbox"
-                                id="heart"
-                            />
+                        <label className={classes.articleLabel}>
+                            <input className={classes.articleCheckbox} type="checkbox" id="heart" />
                             <span className={classes.articleCountCheck}>
                                 {article.favoritesCount}
                             </span>
@@ -42,17 +39,17 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                     <div className={classes.articleAutorDate}>
                         <p className={classes.articleAutor}>{article.author.username}</p>
                         <div className={classes.articleDate}>
-                            {new Date(article.createdAt).toLocaleDateString('en-US', {
-                                month: 'long',
-                                day: 'numeric',
-                                year: 'numeric',
+                            {new Date(article.createdAt).toLocaleDateString("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
                             })}
                         </div>
                     </div>
                     <img
                         className={classes.articleImg}
                         alt="Avatar"
-                        src={article.author.image || '/avatar.svg'}
+                        src={article.author.image || "/avatar.svg"}
                         width="46"
                         height="46"
                     />

@@ -1,21 +1,9 @@
-@use '@/styles/variables' as *;
+@use "@/styles/variables" as *;
 
 .articleList {
     &Pagination {
         justify-content: center;
         margin-bottom: 30px;
-    }
-
-    &Loader {
-        position: absolute;
-        left: 50%;
-        top: 100px;
-        z-index: $z-index-loader;
-    }
-
-    &Error {
-        width: 400px;
-        margin: 20px auto 0;
     }
 
     :global {

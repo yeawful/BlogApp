@@ -1,4 +1,4 @@
-@use '@/styles/variables' as *;
+@use "@/styles/variables" as *;
 
 .header {
     background-color: $color-white;
@@ -40,5 +40,36 @@
         padding: 10px 18px;
         margin-left: 19px;
         cursor: pointer;
+    }
+
+    &ProfileBtn {
+        color: $color-black;
+        border: none;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &LogoutBtn {
+        color: $color-black;
+        border: 1px solid $color-black;
+        background-color: $color-white;
+        font-size: $font-size-lg;
+        line-height: $line-height-md;
+        border-radius: $border-radius-md;
+        padding: 10px 18px;
+        margin-left: 19px;
+        cursor: pointer;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 }

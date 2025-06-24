@@ -1,0 +1,33 @@
+@use "@/styles/variables" as *;
+
+.profile {
+    background-color: $color-white;
+    width: 384px;
+    margin: 59px auto;
+    padding: 48px 32px;
+    border-radius: 6px;
+    box-shadow: 0 22px 106px rgba(186, 186, 186, 0.5);
+
+    .title {
+        text-align: center;
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 20px;
+    }
+
+    .error {
+        margin-bottom: 20px;
+    }
+
+    .form {
+        .ant-form-item {
+            margin-bottom: 12px;
+        }
+    }
+
+    .button {
+        width: 100%;
+        margin-top: 20px;
+        height: 40px;
+    }
+}
