@@ -5,18 +5,20 @@
     "singleQuote": false,
     "trailingComma": "all",
     "bracketSpacing": true,
-    "printWidth": 100,
+    "printWidth": 80,
     "importOrder": [
-        "^(react|react-dom)$",
-        "^(next|next-router)$",
-        "^[a-z][a-z0-9-]+$",
-        "^@[^/]+",
-        "^~/(.*)$",
-        "^[../]+",
+        "^react$",
+        "^react-dom$",
+        "^react-router-dom$",
+        "^@reduxjs/toolkit$",
+        "^antd$",
+        "^@/(.*)$",
+        "^[../]",
         "^[./]",
-        "^(.*).(css|scss|svg)$"
+        "(.scss|.css|.module.scss)$"
     ],
-    "importOrderSeparation": true,
+    "importOrderSeparation": false,
     "importOrderSortSpecifiers": true,
+    "importOrderCaseInsensitive": true,
     "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

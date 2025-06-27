@@ -1,0 +1,34 @@
+@use "@/styles/variables" as *;
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+
+    &DeleteBtn {
+        height: 31px;
+        width: 78px;
+        background-color: white;
+        color: $btn_delete;
+        border: 1px solid $btn_delete;
+        border-radius: 5px;
+        padding: 4px 17px 5px 17px;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    &EditBtn {
+        height: 31px;
+        width: 65px;
+        background-color: white;
+        color: $color-success;
+        border: 1px solid $color-success;
+        border-radius: 5px;
+        padding: 4px 19px 5px 19px;
+        margin-left: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 22px;
+    }
+}

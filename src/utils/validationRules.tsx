@@ -81,11 +81,44 @@ export const validationRules = {
                 message: "Некорректный URL",
             },
             validate: (value: string | null | undefined) => {
-                if (value === null || value === undefined || value === "") return true;
+                if (value === null || value === undefined || value === "")
+                    return true;
                 return (
-                    /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(value) ||
-                    "Некорректный URL"
+                    /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i.test(
+                        value,
+                    ) || "Некорректный URL"
                 );
+            },
+        },
+    },
+    article: {
+        title: {
+            required: "Название обязательно",
+            minLength: {
+                value: 3,
+                message: "Минимум 3 символа",
+            },
+            maxLength: {
+                value: 100,
+                message: "Максимум 100 символов",
+            },
+        },
+        description: {
+            required: "Описание обязательно",
+            minLength: {
+                value: 10,
+                message: "Минимум 10 символов",
+            },
+            maxLength: {
+                value: 200,
+                message: "Максимум 200 символов",
+            },
+        },
+        body: {
+            required: "Текст обязателен",
+            minLength: {
+                value: 10,
+                message: "Минимум 10 символов",
             },
         },
     },

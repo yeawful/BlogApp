@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-
-import { useParams } from "react-router";
-
+import { useParams } from "react-router-dom";
 import { fetchArticle } from "../../store/ArticleSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import Article from "../Article";
@@ -11,7 +9,9 @@ import Loader from "../Loader";
 const ArticlePost = () => {
     const { slug } = useParams<{ slug: string }>();
     const dispatch = useAppDispatch();
-    const { currentArticle, isLoading, error } = useAppSelector((state) => state.articles);
+    const { currentArticle, isLoading, error } = useAppSelector(
+        (state) => state.articles,
+    );
 
     useEffect(() => {
         if (slug) {
@@ -27,7 +27,11 @@ const ArticlePost = () => {
         return <ErrorAlert />;
     }
 
-    return <Article article={currentArticle} isFullView />;
+    return (
+        <div>
+            <Article article={currentArticle} isFullView />
+        </div>
+    );
 };
 
 export default ArticlePost;

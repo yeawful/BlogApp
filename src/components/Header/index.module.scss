@@ -42,6 +42,18 @@
         cursor: pointer;
     }
 
+    &CreateBtn {
+        color: $color-success;
+        border: 1px solid $color-success;
+        background-color: white;
+        font-size: 14px;
+        line-height: 22px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-right: 27px;
+        cursor: pointer;
+    }
+
     &ProfileBtn {
         color: $color-black;
         border: none;

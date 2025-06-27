@@ -1,8 +1,11 @@
 import axios from "axios";
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import { getCurrentUserApi, loginUserApi, registerUserApi, updateUserApi } from "../api/userApi";
+import {
+    getCurrentUserApi,
+    loginUserApi,
+    registerUserApi,
+    updateUserApi,
+} from "../api/userApi";
 import {
     LoginRequest,
     RegisterRequest,
@@ -29,45 +32,60 @@ const handleApiError = (error: unknown) => {
             const errors = error.response.data as ApiErrorResponse;
             if (errors?.errors) {
                 return Object.entries(errors.errors)
-                    .map(([field, fieldErrors]) => `${field}: ${fieldErrors.join(", ")}`)
+                    .map(
+                        ([field, fieldErrors]) =>
+                            `${field}: ${fieldErrors.join(", ")}`,
+                    )
                     .join("; ");
             }
             return "Проверьте правильность введенных данных";
         }
-        return error.response?.data?.message || "Произошла ошибка при выполнении запроса";
+        return (
+            error.response?.data?.message ||
+            "Произошла ошибка при выполнении запроса"
+        );
     }
     return "Произошла неизвестная ошибка";
 };
 
-export const loginUser = createAsyncThunk("user/login", async (data: LoginRequest) => {
-    try {
-        const response = await loginUserApi(data);
-        saveToken(response.user.token);
-        return response.user;
-    } catch (error) {
-        throw handleApiError(error);
-    }
-});
+export const loginUser = createAsyncThunk(
+    "user/login",
+    async (data: LoginRequest) => {
+        try {
+            const response = await loginUserApi(data);
+            saveToken(response.user.token);
+            return response.user;
+        } catch (error) {
+            throw handleApiError(error);
+        }
+    },
+);
 
-export const registerUser = createAsyncThunk("user/register", async (data: RegisterRequest) => {
-    try {
-        const res = await registerUserApi(data);
-        saveToken(res.user.token);
-        return res.user;
-    } catch (error) {
-        throw handleApiError(error);
-    }
-});
+export const registerUser = createAsyncThunk(
+    "user/register",
+    async (data: RegisterRequest) => {
+        try {
+            const res = await registerUserApi(data);
+            saveToken(res.user.token);
+            return res.user;
+        } catch (error) {
+            throw handleApiError(error);
+        }
+    },
+);
 
-export const fetchCurrentUser = createAsyncThunk("user/fetchCurrentUser", async (token: string) => {
-    try {
-        const response = await getCurrentUserApi(token);
-        return response.user;
-    } catch (error) {
-        removeToken();
-        throw handleApiError(error);
-    }
-});
+export const fetchCurrentUser = createAsyncThunk(
+    "user/fetchCurrentUser",
+    async (token: string) => {
+        try {
+            const response = await getCurrentUserApi(token);
+            return response.user;
+        } catch (error) {
+            removeToken();
+            throw handleApiError(error);
+        }
+    },
+);
 
 export const updateUserProfile = createAsyncThunk(
     "user/update",
@@ -138,7 +156,8 @@ const userSlice = createSlice({
             })
             .addCase(fetchCurrentUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || "Ошибка загрузки пользователя";
+                state.error =
+                    action.error.message || "Ошибка загрузки пользователя";
             })
             .addCase(updateUserProfile.pending, (state) => {
                 state.isLoading = true;
@@ -150,7 +169,8 @@ const userSlice = createSlice({
             })
             .addCase(updateUserProfile.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || "Ошибка обновления профиля";
+                state.error =
+                    action.error.message || "Ошибка обновления профиля";
             });
     },
 });

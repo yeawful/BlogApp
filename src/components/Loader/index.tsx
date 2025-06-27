@@ -1,5 +1,4 @@
 import { Spin } from "antd";
-
 import classes from "./index.module.scss";
 
 const Loader = () => {

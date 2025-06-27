@@ -1,9 +1,8 @@
-import { Alert, Button, Checkbox, Form, Input, Typography } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-
-import { loginUser, registerUser } from "../../store/UserSlice";
+import { Alert, Button, Checkbox, Form, Input, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from "../../store/store";
+import { loginUser, registerUser } from "../../store/UserSlice";
 import { AuthFormData, AuthFormProps } from "../../types/UserInterfaces";
 import { validationRules } from "../../utils/validationRules";
 import classes from "./index.module.scss";
@@ -62,9 +61,14 @@ const Sign = ({ mode }: AuthFormProps) => {
                 {mode === "login" ? "Вход" : "Создать аккаунт"}
             </Typography.Title>
 
-            {error && <Alert message={error} type="error" className={classes.error} />}
+            {error && (
+                <Alert message={error} type="error" className={classes.error} />
+            )}
 
-            <form className={classes.form} onSubmit={handleSubmit(onSubmitHandle)}>
+            <form
+                className={classes.form}
+                onSubmit={handleSubmit(onSubmitHandle)}
+            >
                 {mode === "register" && (
                     <Controller
                         name="username"
@@ -73,11 +77,19 @@ const Sign = ({ mode }: AuthFormProps) => {
                         render={({ field, fieldState }) => (
                             <Form.Item
                                 validateStatus={
-                                    fieldState.error && touchedFields.username ? "error" : ""
+                                    fieldState.error && touchedFields.username
+                                        ? "error"
+                                        : ""
                                 }
-                                help={touchedFields.username && fieldState.error?.message}
+                                help={
+                                    touchedFields.username &&
+                                    fieldState.error?.message
+                                }
                             >
-                                <Input placeholder="Имя пользователя" {...field} />
+                                <Input
+                                    placeholder="Имя пользователя"
+                                    {...field}
+                                />
                             </Form.Item>
                         )}
                     />
@@ -93,10 +105,20 @@ const Sign = ({ mode }: AuthFormProps) => {
                     }
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.email ? "error" : ""}
-                            help={touchedFields.email && fieldState.error?.message}
+                            validateStatus={
+                                fieldState.error && touchedFields.email
+                                    ? "error"
+                                    : ""
+                            }
+                            help={
+                                touchedFields.email && fieldState.error?.message
+                            }
                         >
-                            <Input placeholder="Email" type="email" {...field} />
+                            <Input
+                                placeholder="Email"
+                                type="email"
+                                {...field}
+                            />
                         </Form.Item>
                     )}
                 />
@@ -112,9 +134,14 @@ const Sign = ({ mode }: AuthFormProps) => {
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.password ? "error" : ""
+                                fieldState.error && touchedFields.password
+                                    ? "error"
+                                    : ""
                             }
-                            help={touchedFields.password && fieldState.error?.message}
+                            help={
+                                touchedFields.password &&
+                                fieldState.error?.message
+                            }
                         >
                             <Input.Password placeholder="Пароль" {...field} />
                         </Form.Item>
@@ -126,17 +153,26 @@ const Sign = ({ mode }: AuthFormProps) => {
                         <Controller
                             name="repeatPassword"
                             control={control}
-                            rules={validationRules.register.repeatPassword(watch("password"))}
+                            rules={validationRules.register.repeatPassword(
+                                watch("password"),
+                            )}
                             render={({ field, fieldState }) => (
                                 <Form.Item
                                     validateStatus={
-                                        fieldState.error && touchedFields.repeatPassword
+                                        fieldState.error &&
+                                        touchedFields.repeatPassword
                                             ? "error"
                                             : ""
                                     }
-                                    help={touchedFields.repeatPassword && fieldState.error?.message}
+                                    help={
+                                        touchedFields.repeatPassword &&
+                                        fieldState.error?.message
+                                    }
                                 >
-                                    <Input.Password placeholder="Повторите пароль" {...field} />
+                                    <Input.Password
+                                        placeholder="Повторите пароль"
+                                        {...field}
+                                    />
                                 </Form.Item>
                             )}
                         />
@@ -148,16 +184,25 @@ const Sign = ({ mode }: AuthFormProps) => {
                             render={({ field, fieldState }) => (
                                 <Form.Item
                                     validateStatus={
-                                        fieldState.error && touchedFields.acceptTerms ? "error" : ""
+                                        fieldState.error &&
+                                        touchedFields.acceptTerms
+                                            ? "error"
+                                            : ""
                                     }
-                                    help={touchedFields.acceptTerms && fieldState.error?.message}
+                                    help={
+                                        touchedFields.acceptTerms &&
+                                        fieldState.error?.message
+                                    }
                                 >
                                     <Checkbox
                                         {...field}
                                         checked={field.value}
-                                        onChange={(e) => field.onChange(e.target.checked)}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.checked)
+                                        }
                                     >
-                                        Я согласен на обработку персональных данных
+                                        Я согласен на обработку персональных
+                                        данных
                                     </Checkbox>
                                 </Form.Item>
                             )}

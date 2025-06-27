@@ -1,12 +1,19 @@
 import Avatar from "../assets/icons/avatar.svg";
-import { LoginRequest, RegisterRequest, UpdateUserRequest, User } from "../types/UserInterfaces";
+import {
+    LoginRequest,
+    RegisterRequest,
+    UpdateUserRequest,
+    User,
+} from "../types/UserInterfaces";
 import { apiClient } from "./articlesApi";
 
 interface UserResponse {
     user: User;
 }
 
-export const loginUserApi = async (data: LoginRequest): Promise<UserResponse> => {
+export const loginUserApi = async (
+    data: LoginRequest,
+): Promise<UserResponse> => {
     const response = await apiClient.post<UserResponse>("/users/login", {
         user: {
             email: data.email,
@@ -16,7 +23,9 @@ export const loginUserApi = async (data: LoginRequest): Promise<UserResponse> =>
     return response.data;
 };
 
-export const registerUserApi = async (data: RegisterRequest): Promise<UserResponse> => {
+export const registerUserApi = async (
+    data: RegisterRequest,
+): Promise<UserResponse> => {
     const response = await apiClient.post<UserResponse>("/users", {
         user: {
             username: data.username,
@@ -28,7 +37,9 @@ export const registerUserApi = async (data: RegisterRequest): Promise<UserRespon
     return response.data;
 };
 
-export const getCurrentUserApi = async (token: string): Promise<UserResponse> => {
+export const getCurrentUserApi = async (
+    token: string,
+): Promise<UserResponse> => {
     const response = await apiClient.get<UserResponse>("/user", {
         headers: {
             Authorization: `Token ${token}`,
