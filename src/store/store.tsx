@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { configureStore } from "@reduxjs/toolkit";
-
 import ArticleReducer from "./ArticleSlice";
 import UserReducer from "./UserSlice";
 

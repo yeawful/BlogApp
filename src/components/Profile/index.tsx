@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-
-import { Alert, Button, Form, Input, Typography } from "antd";
 import { Controller, useForm } from "react-hook-form";
-
-import { fetchCurrentUser, updateUserProfile } from "../../store/UserSlice";
+import { useEffect } from "react";
+import { Alert, Button, Form, Input, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from "../../store/store";
+import { fetchCurrentUser, updateUserProfile } from "../../store/UserSlice";
 import { ProfileFormData } from "../../types/UserInterfaces";
+import { getToken } from "../../utils/encryptUtils";
 import { validationRules } from "../../utils/validationRules";
 import ErrorAlert from "../ErrorAlert";
 import Loader from "../Loader";
@@ -27,9 +26,10 @@ const Profile = () => {
     });
 
     useEffect(() => {
-        if (!user) {
-            dispatch(fetchCurrentUser());
-        } else {
+        const token = getToken();
+        if (!user && token) {
+            dispatch(fetchCurrentUser(token));
+        } else if (user) {
             reset({
                 username: user.username,
                 email: user.email,
@@ -42,7 +42,8 @@ const Profile = () => {
     const onSubmit = (data: ProfileFormData) => {
         const updateData: Partial<ProfileFormData> = {};
 
-        if (data.username !== user?.username) updateData.username = data.username;
+        if (data.username !== user?.username)
+            updateData.username = data.username;
         if (data.email !== user?.email) updateData.email = data.email;
         if (data.password) updateData.password = data.password;
         if (data.image !== user?.image) updateData.image = data.image;
@@ -66,7 +67,9 @@ const Profile = () => {
                 Редактировать профиль
             </Title>
 
-            {error && <Alert message={error} type="error" className={classes.error} />}
+            {error && (
+                <Alert message={error} type="error" className={classes.error} />
+            )}
 
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <Controller
@@ -76,9 +79,14 @@ const Profile = () => {
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.username ? "error" : ""
+                                fieldState.error && touchedFields.username
+                                    ? "error"
+                                    : ""
                             }
-                            help={touchedFields.username && fieldState.error?.message}
+                            help={
+                                touchedFields.username &&
+                                fieldState.error?.message
+                            }
                         >
                             <Input placeholder="Имя пользователя" {...field} />
                         </Form.Item>
@@ -91,10 +99,20 @@ const Profile = () => {
                     rules={validationRules.profile.email}
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.email ? "error" : ""}
-                            help={touchedFields.email && fieldState.error?.message}
+                            validateStatus={
+                                fieldState.error && touchedFields.email
+                                    ? "error"
+                                    : ""
+                            }
+                            help={
+                                touchedFields.email && fieldState.error?.message
+                            }
                         >
-                            <Input placeholder="Email" type="email" {...field} />
+                            <Input
+                                placeholder="Email"
+                                type="email"
+                                {...field}
+                            />
                         </Form.Item>
                     )}
                 />
@@ -106,11 +124,19 @@ const Profile = () => {
                     render={({ field, fieldState }) => (
                         <Form.Item
                             validateStatus={
-                                fieldState.error && touchedFields.password ? "error" : ""
+                                fieldState.error && touchedFields.password
+                                    ? "error"
+                                    : ""
                             }
-                            help={touchedFields.password && fieldState.error?.message}
+                            help={
+                                touchedFields.password &&
+                                fieldState.error?.message
+                            }
                         >
-                            <Input.Password placeholder="Новый пароль" {...field} />
+                            <Input.Password
+                                placeholder="Новый пароль"
+                                {...field}
+                            />
                         </Form.Item>
                     )}
                 />
@@ -121,8 +147,14 @@ const Profile = () => {
                     rules={validationRules.profile.image}
                     render={({ field, fieldState }) => (
                         <Form.Item
-                            validateStatus={fieldState.error && touchedFields.image ? "error" : ""}
-                            help={touchedFields.image && fieldState.error?.message}
+                            validateStatus={
+                                fieldState.error && touchedFields.image
+                                    ? "error"
+                                    : ""
+                            }
+                            help={
+                                touchedFields.image && fieldState.error?.message
+                            }
                         >
                             <Input
                                 placeholder="Аватар (URL)"

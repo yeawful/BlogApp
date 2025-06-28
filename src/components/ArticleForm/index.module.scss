@@ -1,0 +1,50 @@
+@use "@/styles/variables" as *;
+
+.articleForm {
+    background-color: $color-white;
+    width: 938px;
+    min-height: 300px;
+    margin: 34px auto;
+    box-shadow: $shadow-sm;
+    padding: 48px 32px;
+    border-radius: $border-radius-md;
+
+    .title {
+        text-align: center;
+        font-size: $font-size-xl;
+        line-height: $line-height-md;
+        margin-bottom: 21px;
+        color: $color-black;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .tagsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .tagItem {
+        display: flex;
+        gap: 12px;
+    }
+
+    .tagInput {
+        flex: 1;
+    }
+
+    .tagButton {
+        width: 120px;
+    }
+
+    .submitButton {
+        width: 320px;
+        margin-top: 21px;
+    }
+}

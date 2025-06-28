@@ -40,3 +40,17 @@ export interface ArticleFilters {
     limit?: number;
     offset?: number;
 }
+
+export interface ICreateArticle {
+    title: string;
+    description: string;
+    body: string;
+    tagList: string[];
+}
+
+export interface IArticleFormProps {
+    mode: "create" | "edit";
+    initialData?: ICreateArticle;
+    onSubmit: (values: ICreateArticle) => Promise<void>;
+    isLoading?: boolean;
+}

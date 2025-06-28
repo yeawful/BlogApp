@@ -1,8 +1,6 @@
 import { useEffect } from "react";
-
-import { Pagination } from "antd";
 import { useSearchParams } from "react-router-dom";
-
+import { Pagination } from "antd";
 import { fetchArticles, setCurrentPage } from "../../store/ArticleSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { ArticleType } from "../../types/ArticleInterfaces";
@@ -13,9 +11,8 @@ import classes from "./index.module.scss";
 
 const ArticleList = () => {
     const dispatch = useAppDispatch();
-    const { articles, isLoading, error, totalArticles, currentPage } = useAppSelector(
-        (state) => state.articles,
-    );
+    const { articles, isLoading, error, totalArticles, currentPage } =
+        useAppSelector((state) => state.articles);
     const [searchParams, setSearchParams] = useSearchParams();
     const pageFromURL = Number(searchParams.get("page")) || 1;
 
@@ -36,6 +33,7 @@ const ArticleList = () => {
 
     const handlePageChange = (page: number) => {
         setSearchParams({ page: page.toString() });
+        dispatch(setCurrentPage(page));
     };
 
     if (isLoading) {
