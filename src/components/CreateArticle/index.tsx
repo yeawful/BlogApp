@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
-import { createArticle } from "../../api/articlesApi";
+import { createArticleApi } from "../../api/articlesApi";
 import { useAppSelector } from "../../store/store";
 import { ICreateArticle } from "../../types/ArticleInterfaces";
 import ArticleForm from "../ArticleForm";
@@ -23,7 +23,7 @@ const CreateArticle = () => {
 
         try {
             setIsLoading(true);
-            const response = await createArticle(data);
+            const response = await createArticleApi(data);
             Modal.success({
                 content: "Статья успешно создана",
             });

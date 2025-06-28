@@ -30,7 +30,7 @@ export const fetchArticlesApi = async (
     return response.data;
 };
 
-export const fetchArticle = async (
+export const fetchArticleApi = async (
     slug: string,
 ): Promise<{ article: ArticleType }> => {
     const response = await apiClient.get<{ article: ArticleType }>(
@@ -39,7 +39,25 @@ export const fetchArticle = async (
     return response.data;
 };
 
-export const createArticle = async (
+export const favoriteArticleApi = async (
+    slug: string,
+): Promise<{ article: ArticleType }> => {
+    const response = await apiClient.post<{ article: ArticleType }>(
+        `/articles/${slug}/favorite`,
+    );
+    return response.data;
+};
+
+export const unfavoriteArticleApi = async (
+    slug: string,
+): Promise<{ article: ArticleType }> => {
+    const response = await apiClient.delete<{ article: ArticleType }>(
+        `/articles/${slug}/favorite`,
+    );
+    return response.data;
+};
+
+export const createArticleApi = async (
     data: ICreateArticle,
 ): Promise<{ article: ArticleType }> => {
     const response = await apiClient.post<{ article: ArticleType }>(
@@ -51,7 +69,7 @@ export const createArticle = async (
     return response.data;
 };
 
-export const updateArticle = async (
+export const updateArticleApi = async (
     slug: string,
     data: ICreateArticle,
 ): Promise<{ article: ArticleType }> => {
@@ -64,6 +82,6 @@ export const updateArticle = async (
     return response.data;
 };
 
-export const deleteArticle = async (slug: string): Promise<void> => {
+export const deleteArticleApi = async (slug: string): Promise<void> => {
     await apiClient.delete(`/articles/${slug}`);
 };
