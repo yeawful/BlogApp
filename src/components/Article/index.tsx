@@ -2,6 +2,7 @@ import Markdown from "markdown-to-jsx";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../store/store";
 import { ArticleType } from "../../types/ArticleInterfaces";
+import { formatDate } from "../../utils/dateutils";
 import ArticleActions from "../ArticleActions";
 import classes from "./index.module.scss";
 
@@ -37,9 +38,9 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                     </div>
 
                     <div className={classes.articleGenres}>
-                        {article.tagList.map((tag, index) => (
+                        {article.tagList.map((tag) => (
                             <span
-                                key={index}
+                                key={tag}
                                 className={classes.articleGenresTags}
                             >
                                 {tag}
@@ -54,14 +55,7 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                             {article.author.username}
                         </p>
                         <div className={classes.articleDate}>
-                            {new Date(article.createdAt).toLocaleDateString(
-                                "en-US",
-                                {
-                                    month: "long",
-                                    day: "numeric",
-                                    year: "numeric",
-                                },
-                            )}
+                            {formatDate(article.createdAt)}
                         </div>
                     </div>
                     <img
