@@ -33,6 +33,9 @@
         line-height: $line-height-md;
         margin-right: 13px;
         color: $color-primary;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 650px;
     }
 
     &CountCheck {
@@ -48,6 +51,15 @@
     &RightSide {
         display: flex;
         align-items: center;
+    }
+
+    &LeftSide {
+        overflow: hidden;
+    }
+
+    &Genres {
+        max-width: 650px;
+        padding-bottom: 3px;
     }
 
     &GenresTags {
