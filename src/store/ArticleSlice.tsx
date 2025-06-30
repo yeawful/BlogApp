@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-    createArticle as createArticleApi,
-    deleteArticle as deleteArticleApi,
-    fetchArticle as fetchArticleApi,
+    createArticleApi,
+    deleteArticleApi,
+    favoriteArticleApi,
+    fetchArticleApi,
     fetchArticlesApi,
-    updateArticle as updateArticleApi,
+    unfavoriteArticleApi,
+    updateArticleApi,
 } from "../api/articlesApi";
 import {
     ArticlesResponse,
@@ -38,6 +40,22 @@ export const fetchArticle = createAsyncThunk<ArticleType, string>(
     "articles/fetchArticle",
     async (slug) => {
         const response = await fetchArticleApi(slug);
+        return response.article;
+    },
+);
+
+export const favoriteArticle = createAsyncThunk<ArticleType, string>(
+    "articles/favoriteArticle",
+    async (slug) => {
+        const response = await favoriteArticleApi(slug);
+        return response.article;
+    },
+);
+
+export const unfavoriteArticle = createAsyncThunk<ArticleType, string>(
+    "articles/unfavoriteArticle",
+    async (slug) => {
+        const response = await unfavoriteArticleApi(slug);
         return response.article;
     },
 );
@@ -145,6 +163,82 @@ const articlesSlice = createSlice({
                 state.isLoading = false;
                 state.error =
                     action.error.message || "Не удалось удалить статью";
+            })
+            .addCase(favoriteArticle.pending, (state, action) => {
+                const slug = action.meta.arg;
+                state.articles = state.articles.map((article) =>
+                    article.slug === slug
+                        ? {
+                              ...article,
+                              favorited: true,
+                              favoritesCount: article.favoritesCount + 1,
+                          }
+                        : article,
+                );
+                if (state.currentArticle?.slug === slug) {
+                    state.currentArticle = {
+                        ...state.currentArticle,
+                        favorited: true,
+                        favoritesCount: state.currentArticle.favoritesCount + 1,
+                    };
+                }
+            })
+            .addCase(favoriteArticle.rejected, (state, action) => {
+                const slug = action.meta.arg;
+                state.articles = state.articles.map((article) =>
+                    article.slug === slug
+                        ? {
+                              ...article,
+                              favorited: false,
+                              favoritesCount: article.favoritesCount - 1,
+                          }
+                        : article,
+                );
+                if (state.currentArticle?.slug === slug) {
+                    state.currentArticle = {
+                        ...state.currentArticle,
+                        favorited: false,
+                        favoritesCount: state.currentArticle.favoritesCount - 1,
+                    };
+                }
+            })
+            .addCase(unfavoriteArticle.pending, (state, action) => {
+                const slug = action.meta.arg;
+                state.articles = state.articles.map((article) =>
+                    article.slug === slug
+                        ? {
+                              ...article,
+                              favorited: false,
+                              favoritesCount: article.favoritesCount - 1,
+                          }
+                        : article,
+                );
+                if (state.currentArticle?.slug === slug) {
+                    state.currentArticle = {
+                        ...state.currentArticle,
+                        favorited: false,
+                        favoritesCount: state.currentArticle.favoritesCount - 1,
+                    };
+                }
+            })
+            .addCase(unfavoriteArticle.rejected, (state, action) => {
+                const slug = action.meta.arg;
+                state.articles = state.articles.map((article) =>
+                    article.slug === slug
+                        ? {
+                              ...article,
+                              favorited: true,
+                              favoritesCount: article.favoritesCount + 1,
+                          }
+                        : article,
+                );
+                if (state.currentArticle?.slug === slug) {
+                    state.currentArticle = {
+                        ...state.currentArticle,
+                        favorited: true,
+                        favoritesCount: state.currentArticle.favoritesCount + 1,
+                    };
+                }
             });
     },
 });

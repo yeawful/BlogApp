@@ -1,6 +1,8 @@
 import Markdown from "markdown-to-jsx";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../store/store";
+import { favoriteArticle, unfavoriteArticle } from "../../store/ArticleSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { ArticleType } from "../../types/ArticleInterfaces";
 import { formatDate } from "../../utils/dateutils";
 import ArticleActions from "../ArticleActions";
@@ -12,8 +14,27 @@ interface BlogProps {
 }
 
 const Article = ({ article, isFullView = false }: BlogProps) => {
+    const dispatch = useAppDispatch();
     const { user } = useAppSelector((state) => state.user);
     const isAuthor = user?.username === article.author.username;
+    const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
+
+    const handleFavoriteClick = async () => {
+        if (!user) return;
+
+        try {
+            setIsFavoriteLoading(true);
+            if (article.favorited) {
+                await dispatch(unfavoriteArticle(article.slug)).unwrap();
+            } else {
+                await dispatch(favoriteArticle(article.slug)).unwrap();
+            }
+        } catch {
+            console.error("Ошибка");
+        } finally {
+            setIsFavoriteLoading(false);
+        }
+    };
 
     return (
         <div className={classes.article}>
@@ -30,6 +51,9 @@ const Article = ({ article, isFullView = false }: BlogProps) => {
                                 className={classes.articleCheckbox}
                                 type="checkbox"
                                 id="heart"
+                                checked={article.favorited}
+                                onChange={handleFavoriteClick}
+                                disabled={!user || isFavoriteLoading}
                             />
                             <span className={classes.articleCountCheck}>
                                 {article.favoritesCount}
